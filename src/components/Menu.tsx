@@ -77,38 +77,40 @@ export default function Menu() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-6 pt-24 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] hover:bg-white/50 transition-all duration-500 group cursor-pointer"
+                className="relative rounded-[2.5rem] p-[2px] bg-gradient-to-br from-amber-500/30 via-white/50 to-orange-500/30 hover:from-amber-500/60 hover:to-orange-500/60 transition-all duration-500 group cursor-pointer shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]"
                 onClick={() => setSelectedItem(item)}
               >
-                {/* Floating Circular Image */}
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full shadow-2xl overflow-hidden border-4 border-white/80 group-hover:-translate-y-4 transition-transform duration-500 z-10">
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                
-                <div className="text-center flex flex-col h-full">
-                  <h3 className="font-bold text-xl text-gray-900 mb-2 tracking-tight">{item.name}</h3>
-                  <p className="text-gray-500 text-sm line-clamp-2 mb-6 font-medium leading-relaxed flex-grow">{item.description}</p>
+                <div className="relative bg-white/60 backdrop-blur-xl rounded-[calc(2.5rem-2px)] p-6 pt-24 h-full flex flex-col transition-colors duration-500 group-hover:bg-white/80">
+                  {/* Floating Circular Image */}
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full shadow-2xl overflow-hidden border-4 border-white/80 group-hover:-translate-y-4 transition-transform duration-500 z-10">
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
                   
-                  <div className="flex justify-between items-center mt-auto pt-4 border-t border-black/5">
-                    <span className="font-bold text-xl text-gray-900">{item.price}</span>
-                    <div className="flex gap-2">
-                      <button 
-                        className="w-10 h-10 rounded-full bg-white/60 flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-white transition-colors shadow-sm"
-                        onClick={(e) => { e.stopPropagation(); /* Add to fav logic */ }}
-                      >
-                        <Heart size={18} />
-                      </button>
-                      <button 
-                        className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-md"
-                        onClick={(e) => { e.stopPropagation(); /* Add to cart logic */ }}
-                      >
-                        <Plus size={20} />
-                      </button>
+                  <div className="text-center flex flex-col h-full">
+                    <h3 className="font-bold text-xl text-gray-900 mb-2 tracking-tight">{item.name}</h3>
+                    <p className="text-gray-500 text-sm line-clamp-2 mb-6 font-medium leading-relaxed flex-grow">{item.description}</p>
+                    
+                    <div className="flex justify-between items-center mt-auto pt-4 border-t border-black/5">
+                      <span className="font-bold text-xl text-gray-900">{item.price}</span>
+                      <div className="flex gap-2">
+                        <button 
+                          className="w-10 h-10 rounded-full bg-white/60 flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-white transition-colors shadow-sm"
+                          onClick={(e) => { e.stopPropagation(); /* Add to fav logic */ }}
+                        >
+                          <Heart size={18} />
+                        </button>
+                        <button 
+                          className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-md"
+                          onClick={(e) => { e.stopPropagation(); /* Add to cart logic */ }}
+                        >
+                          <Plus size={20} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

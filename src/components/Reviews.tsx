@@ -10,49 +10,62 @@ const REVIEWS = [
 
 export default function Reviews() {
   return (
-    <section className="py-32 px-6 bg-[#0a0a0a] text-white relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+    <section className="py-32 px-6 relative overflow-hidden min-h-screen flex flex-col justify-center bg-black">
+      {/* Blurred Image Background */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop" 
+          alt="Restaurant Background" 
+          className="w-full h-full object-cover filter blur-xl scale-110 opacity-60"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10 w-full">
         <div className="text-center mb-20">
-          <span className="text-accent uppercase tracking-[0.2em] text-sm font-semibold mb-4 block">Testimonials</span>
-          <h2 className="text-4xl md:text-6xl font-light mb-6 font-serif">A Taste of <span className="italic text-accent">Perfection</span></h2>
-          <div className="flex items-center justify-center gap-3">
+          <span className="text-accent uppercase tracking-[0.2em] text-sm font-bold mb-4 block">Testimonials</span>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">What Our Guests Say</h2>
+          <div className="flex items-center justify-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 w-fit mx-auto px-6 py-3 rounded-full shadow-sm">
             <div className="flex text-accent">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={24} fill="currentColor" stroke="none" />
+                <Star key={i} size={20} fill="currentColor" stroke="none" />
               ))}
             </div>
-            <span className="text-xl font-medium">4.8 / 5</span>
-            <span className="text-white/40 ml-2">from 240+ reviews</span>
+            <span className="text-xl font-bold text-white">4.8 / 5</span>
+            <span className="text-white/60 ml-2 font-medium">from 240+ reviews</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Featured Large Review */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7 }}
-            className="md:col-span-2 lg:col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-10 md:p-14 relative group hover:bg-white/10 transition-colors duration-500"
+            className="md:col-span-2 lg:col-span-2 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] p-10 md:p-14 relative group hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:bg-white/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]"
           >
-            <Quote size={60} className="text-white/10 absolute top-10 right-10 group-hover:text-accent/20 transition-colors duration-500" />
-            <div className="flex text-accent mb-8">
+            <Quote size={80} className="text-white/10 absolute top-10 right-10 group-hover:text-accent/20 group-hover:scale-110 transition-all duration-500" />
+            <div className="flex text-accent mb-8 gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={18} fill="currentColor" stroke="none" />
+                <Star key={i} size={22} fill="currentColor" stroke="none" />
               ))}
             </div>
-            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-white/90 mb-10">
+            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-white/90 mb-10 font-medium">
               "{REVIEWS[0].text}"
             </p>
-            <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
-              <div>
-                <h4 className="font-semibold text-lg">{REVIEWS[0].name}</h4>
-                <p className="text-white/50 text-sm">{REVIEWS[0].role}</p>
+            <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-xl border border-white/20">
+                  {REVIEWS[0].name.charAt(0)}
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg text-white">{REVIEWS[0].name}</h4>
+                  <p className="text-white/60 text-sm font-medium">{REVIEWS[0].role}</p>
+                </div>
               </div>
-              <span className="text-sm text-white/30">{REVIEWS[0].date}</span>
+              <span className="text-sm font-medium text-white/50 bg-white/10 px-4 py-2 rounded-full border border-white/10">{REVIEWS[0].date}</span>
             </div>
           </motion.div>
 
@@ -62,27 +75,33 @@ export default function Reviews() {
               key={review.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: (index + 1) * 0.1 }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 flex flex-col hover:bg-white/10 transition-colors duration-500"
+              className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2.5rem] p-8 flex flex-col hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:bg-white/20 hover:-translate-y-2 transition-all duration-500 cursor-pointer shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] relative group"
             >
-              <div className="flex text-accent mb-6">
+              <Quote size={40} className="text-white/5 absolute top-8 right-8 group-hover:text-accent/10 transition-colors duration-500" />
+              <div className="flex text-accent mb-6 gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    size={14} 
+                    size={16} 
                     fill={i < review.rating ? "currentColor" : "none"} 
                     stroke={i < review.rating ? "none" : "currentColor"} 
                   />
                 ))}
               </div>
-              <p className="text-lg text-white/80 mb-8 flex-grow leading-relaxed">
+              <p className="text-lg text-white/80 mb-8 flex-grow leading-relaxed font-medium relative z-10">
                 "{review.text}"
               </p>
-              <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
-                <div>
-                  <h4 className="font-medium">{review.name}</h4>
-                  <p className="text-white/50 text-xs">{review.role}</p>
+              <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white font-bold border border-white/20">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white">{review.name}</h4>
+                    <p className="text-white/60 text-xs font-medium">{review.role}</p>
+                  </div>
                 </div>
               </div>
             </motion.div>

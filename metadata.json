@@ -1,7 +1,5 @@
 {
   "name": "Apnar Kitchen",
   "description": "Premium Apple-style restaurant website for Apnar Kitchen with minimal UI, smooth animations, and modern UX.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
+  "requestFramePermissions": []
 }
