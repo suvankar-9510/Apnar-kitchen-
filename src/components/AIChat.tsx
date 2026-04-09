@@ -3,9 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
-// Initialize Gemini API
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 type Message = {
   id: string;
   role: 'user' | 'assistant';
@@ -39,6 +36,16 @@ export default function AIChat() {
     setIsLoading(true);
 
     try {
+      // Safely initialize the API client inside the function to prevent app crashes on load
+      // We check both process.env (used in AI Studio) and import.meta.env (used in Vercel if configured that way)
+      const apiKey = process.env.GEMINI_API_KEY || (import.meta as any).env?.VITE_GEMINI_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error("API key is missing");
+      }
+
+      const ai = new GoogleGenAI({ apiKey });
+
       // Create a prompt that gives the AI context about the restaurant
       const systemPrompt = `You are the helpful AI assistant for "Apnar Kitchen", a multi-cuisine family restaurant. 
       Keep your answers brief, friendly, and helpful. 
